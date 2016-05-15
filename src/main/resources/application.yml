@@ -1,2 +1,2 @@
 
-spring.main.sources: com.michaelhoffmaninc.examples.camel.ordermanagement.OrderManagementRouter
+spring.main.sources: com.nvisia.examples.camel.ordermanagement.OrderManagementRouter
