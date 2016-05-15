@@ -42,7 +42,7 @@ public class OrderManagementRouter extends FatJarRouter {
             // CORS (resource sharing) enablement
             apiProperty("cors", "true").
             // Use localhost for calls
-            apiProperty("host", "localhost:8080").
+            apiProperty("host", "localhost:8082").
             // Set base path
             apiProperty("base.path", "nvisia-order-management-camel-service/api");
 
@@ -59,21 +59,28 @@ public class OrderManagementRouter extends FatJarRouter {
             outType(String.class).
             // Route direct to process order by type
             to("direct:routeOrderByType");
-      
+
       // Definition of the content based routing endpoint
       from("direct:routeOrderByType").
-         // Use the Content Based Router EIP to process the order based on the item type
-         choice().
-         // When this is a book, send it to the process book method
-         when().jsonpath("$.catalogItem.catalogItemType == '" + CatalogItemType.BOOK.toString() + "'").
-            to("bean:orderManagementService?method=processBookOrder(${body})").
-         // When this is clothing, send it to the process clothing method
-         when().jsonpath("$.catalogItem.catalogItemType == '" + CatalogItemType.CLOTHING.toString() + "'").
-            to("bean:orderManagementService?method=processClothingOrder(${body})").
-         // When this is electronics, send it to the process electronics method
-         when().jsonpath("$.catalogItem.catalogItemType == '"+ CatalogItemType.ELECTRONICS.toString() + "'").
-            to("bean:orderManagementService?method=processElectronicsOrder(${body})").
-         otherwise().throwException(new Exception("Invalid catalog item type")); 
+            // Use the Content Based Router EIP to process the order based on
+            // the item type
+      choice().
+            // When this is a book, send it to the process book method
+            when()
+            .simple("${body.catalogItem.catalogItemType} == "
+                  + CatalogItemType.BOOK.toString() + "'")
+            .to("bean:orderManagementService?method=processBookOrder(${body})").
+            // When this is clothing, send it to the process clothing method
+            when()
+            .simple("${body.catalogItem.catalogItemType} == "
+                  + CatalogItemType.CLOTHING.toString() + "'")
+            .to("bean:orderManagementService?method=processClothingOrder(${body})").
+            // When this is electronics, send it to the process electronics
+            // method
+      when().simple("${body.catalogItem.catalogItemType} == "
+            + CatalogItemType.ELECTRONICS.toString() + "'")
+            .to("bean:orderManagementService?method=processElectronicsOrder(${body})")
+            .otherwise().throwException(new Exception("Invalid catalog item type"));
    }
 
    @Bean

@@ -10,8 +10,8 @@ This project holds an example that leverages Apache Camel 2.17 and Spring Boot 1
 ## Testing 
 The best way to test out the API is to leverage Swagger. I've added the Swagger dist into the project's webapp folder. Just start up the server and you can access Swagger UI from the following URL:
 
-http://localhost:8080/nvisia-order-management-camel-service/swagger/index.htm 
+http://localhost:8082/nvisia-order-management-camel-service/swagger/index.htm 
 
 When the page opens, simply enter the following as the API URL:
 
-http://localhost:8080/nvisia-order-management-camel-service/api/api-doc
+http://localhost:8082/nvisia-order-management-camel-service/api/api-doc
