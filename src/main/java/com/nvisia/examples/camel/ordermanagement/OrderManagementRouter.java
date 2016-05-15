@@ -67,17 +67,17 @@ public class OrderManagementRouter extends FatJarRouter {
       choice().
             // When this is a book, send it to the process book method
             when()
-            .simple("${body.catalogItem.catalogItemType} == "
+            .simple("${body.catalogItem.catalogItemType} == '"
                   + CatalogItemType.BOOK.toString() + "'")
             .to("bean:orderManagementService?method=processBookOrder(${body})").
             // When this is clothing, send it to the process clothing method
             when()
-            .simple("${body.catalogItem.catalogItemType} == "
+            .simple("${body.catalogItem.catalogItemType} == '"
                   + CatalogItemType.CLOTHING.toString() + "'")
             .to("bean:orderManagementService?method=processClothingOrder(${body})").
             // When this is electronics, send it to the process electronics
             // method
-      when().simple("${body.catalogItem.catalogItemType} == "
+      when().simple("${body.catalogItem.catalogItemType} == '"
             + CatalogItemType.ELECTRONICS.toString() + "'")
             .to("bean:orderManagementService?method=processElectronicsOrder(${body})")
             .otherwise().throwException(new Exception("Invalid catalog item type"));
