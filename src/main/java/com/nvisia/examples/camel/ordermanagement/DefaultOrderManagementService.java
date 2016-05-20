@@ -12,19 +12,21 @@ import org.springframework.stereotype.*;
 public class DefaultOrderManagementService implements OrderManagementService {
 
    @Override
-   public String processBookOrder(OrderForm orderForm) {
-      return "B-112345-" + orderForm.getCustomer().getId();
+   public Order processBookOrder(OrderForm orderForm) {
+      return new Order(orderForm.getOrderDate(), orderForm.getCustomer(),
+            orderForm.getCatalogItem(), "B-112345-" + orderForm.getCustomer().getId());
    }
 
    @Override
-   public String processClothingOrder(OrderForm orderForm) {
-      return "C-4623-" + orderForm.getCustomer().getId();
+   public Order processClothingOrder(OrderForm orderForm) {
+      return new Order(orderForm.getOrderDate(), orderForm.getCustomer(),
+            orderForm.getCatalogItem(), "C-462322-" + orderForm.getCustomer().getId());
    }
 
    @Override
-   public String processElectronicsOrder(OrderForm orderForm) {
-      return "E-9999-" + orderForm.getCustomer().getId();
+   public Order processElectronicsOrder(OrderForm orderForm) {
+      return new Order(orderForm.getOrderDate(), orderForm.getCustomer(),
+            orderForm.getCatalogItem(), "E-999991-" + orderForm.getCustomer().getId());
    }
-
 
 }

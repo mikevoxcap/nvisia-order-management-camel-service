@@ -9,27 +9,29 @@ package com.nvisia.examples.camel.ordermanagement;
 public interface OrderManagementService {
 
    /**
-    * Processes a book order and returns an order number.
+    * Processes a book order and returns an order number and the full order.
     * 
     * @param orderForm
     * @return
     */
-   String processBookOrder(OrderForm orderForm);
-   
-   /**
-    * Processes a clothing order and returns an order number.
-    * 
-    * @param orderForm
-    * @return
-    */
-   String processClothingOrder(OrderForm orderForm);
+   Order processBookOrder(OrderForm orderForm);
 
    /**
-    * Processes an electronics order and returns an order number.
+    * Processes a clothing order and returns an order number and the full
+    * number.
     * 
     * @param orderForm
     * @return
     */
-   String processElectronicsOrder(OrderForm orderForm);
+   Order processClothingOrder(OrderForm orderForm);
+
+   /**
+    * Processes an electronics order and returns an order number and the full
+    * number.
+    * 
+    * @param orderForm
+    * @return
+    */
+   Order processElectronicsOrder(OrderForm orderForm);
 
 }

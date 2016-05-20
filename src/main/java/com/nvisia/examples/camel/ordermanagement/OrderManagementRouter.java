@@ -56,7 +56,7 @@ public class OrderManagementRouter extends FatJarRouter {
             // Define the type used for input
             type(OrderForm.class).
             // Define the type used for output
-            outType(String.class).
+            outType(Order.class).
             // Route direct to process order by type
             to("direct:routeOrderByType");
 

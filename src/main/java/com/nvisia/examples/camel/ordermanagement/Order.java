@@ -3,21 +3,22 @@ package com.nvisia.examples.camel.ordermanagement;
 import java.util.*;
 
 /**
- * Form for processing a new order
+ * Bean for an order
  * 
- * @author Michael Hoffman
+ * @author Michael Hoffman, NVISIA
  *
  */
-public class OrderForm {
+public class Order {
 
    private Date orderDate;
    private Customer customer;
    private CatalogItem catalogItem;
+   private String orderNumber;
 
    /**
     * Default constructor
     */
-   public OrderForm() {
+   public Order() {
       super();
    }
 
@@ -25,14 +26,18 @@ public class OrderForm {
     * Full constructor
     * 
     * @param orderDate
+    * @param customerId
     * @param customer
+    * @param catalogItemId
     * @param catalogItem
     */
-   public OrderForm(Date orderDate, Customer customer, CatalogItem catalogItem) {
+   public Order(Date orderDate, Customer customer, CatalogItem catalogItem,
+         String orderNumber) {
       super();
       this.orderDate = orderDate;
       this.customer = customer;
       this.catalogItem = catalogItem;
+      this.orderNumber = orderNumber;
    }
 
    /**
@@ -80,6 +85,21 @@ public class OrderForm {
       this.catalogItem = catalogItem;
    }
 
+   /**
+    * @return the orderNumber
+    */
+   public String getOrderNumber() {
+      return orderNumber;
+   }
+
+   /**
+    * @param orderNumber
+    *           the orderNumber to set
+    */
+   public void setOrderNumber(String orderNumber) {
+      this.orderNumber = orderNumber;
+   }
+
    /*
     * (non-Javadoc)
     * 
@@ -102,8 +122,14 @@ public class OrderForm {
       if (catalogItem != null) {
          builder.append("catalogItem=");
          builder.append(catalogItem);
+         builder.append(", ");
+      }
+      if (orderNumber != null) {
+         builder.append("orderNumber=");
+         builder.append(orderNumber);
       }
       builder.append("]");
       return builder.toString();
    }
+
 }
